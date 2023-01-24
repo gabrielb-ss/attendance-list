@@ -10,6 +10,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
+  text-shadow: 0 0 3px black;
 }
 
 .container header img {
@@ -28,7 +30,7 @@
   width: 50%;
   padding: 24px;
 
-  background: #e6e6e6;
+  background: pearl;
   border-radius: 5px;
   border: none;
 
@@ -40,8 +42,8 @@
   padding: 24px;
   font-weight: 700;
 
-  background: #ea4c89;
-  color: #ffffff;
+  background: var(--button-color);
+  color: white;
  
   margin: 12px 0 84px;
   border-radius: 5px;

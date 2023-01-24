@@ -1,12 +1,22 @@
+:root {
+  --background: rgb(166, 197, 242);
+  --pearl: #e6e6e6;
+  --button-color: #634bd7;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--background);
+}
+
 body, input, button {
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   -webkit-font-smoothing: antialiased;
 }
