@@ -9,19 +9,24 @@ export function Home() {
   const [user, setUser] = useState({ name:'', avatar:''})
   
   function handleAddStudent() {
-    const newStudent = {
-      name: studentName,
-      time: new Date().toLocaleTimeString("pt-br", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      })
+    if(studentName !== '' && !/[^a-zA-Z]/.test(studentName) && studentName.length >= 3){
+      const newStudent = {
+        name: studentName,
+        time: new Date().toLocaleTimeString("pt-br", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        })
+      }
+      setStudents(prevState => [...prevState, newStudent]);
+      setStudentName('')
+    } else {
+      alert("Por favor insira um nome com pelo menos 3 letras e apenas letras")
+      setStudentName('')
+      console.log("deu ruim")
     }
-
-    setStudents(prevState => [...prevState, newStudent]);
-    setStudentName('')
   }
-  
+
   useEffect(() => {
     fetch("https://api.github.com/users/gabrielb-ss")
     .then(response => response.json())
@@ -47,12 +52,13 @@ export function Home() {
         id='input_name'
         type="text" 
         value={studentName}
+        minLength="3"
         placeholder="Digite seu nome" 
         onChange={e => setStudentName(e.target.value)}
       />
 
       <button 
-        type="button"
+        type="submit"
         onClick={handleAddStudent}
       >
         Adicionar
