@@ -19,6 +19,7 @@ export function Home() {
     }
 
     setStudents(prevState => [...prevState, newStudent]);
+    setStudentName('')
   }
   
   useEffect(() => {
@@ -43,7 +44,9 @@ export function Home() {
       </header>
 
       <input 
+        id='input_name'
         type="text" 
+        value={studentName}
         placeholder="Digite seu nome" 
         onChange={e => setStudentName(e.target.value)}
       />
