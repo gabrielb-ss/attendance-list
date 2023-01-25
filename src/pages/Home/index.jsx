@@ -46,9 +46,10 @@ export function Home() {
       <input 
         id='input_name'
         type="text" 
-        pattern="^[a-zA-Z, ]+$"
+        pattern="^[^,0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
         minLength="3"
-        placeholder="Digite seu nome" 
+        maxLength="53"
+        placeholder="Digite seu nome e sobrenome" 
         value={studentName}
         onChange={e => setStudentName(e.target.value)}
         required
