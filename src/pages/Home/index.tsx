@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import "./styles.css"
 
-import { Card } from  "../../components/Card"
+import { Card, CardProps } from  "../../components/Card"
+
+type ProfileResponse = {
+  name: string;
+  avatar_url: string;
+}
+
+type User = {
+  name: string;
+  avatar: string;
+}
 
 export function Home() {
   const [studentName, setStudentName] = useState('');
-  const [students, setStudents] = useState([]);
-  const [user, setUser] = useState({ name:'', avatar:''})
+  const [students, setStudents] = useState<CardProps[]>([]);
+  const [user, setUser] = useState<User>({} as User)
   
-  function handleAddStudent(event) {
+  function handleAddStudent(event: React.FormEvent) {
     event.preventDefault();
     const newStudent = {
       name: studentName,
@@ -23,15 +33,18 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch("https://api.github.com/users/gabrielb-ss")
-    .then(response => response.json())
-    .then(data => {
+    async function fetchData() {
+      const response = await fetch("https://api.github.com/users/gabrielb-ss");
+      const data = await response.json() as ProfileResponse;
+
       setUser({
         name: data.name,
         avatar: data.avatar_url
-      })
-    })
-  }, [])
+      });
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <form onSubmit={handleAddStudent} className="container">
@@ -47,8 +60,8 @@ export function Home() {
         id='input_name'
         type="text" 
         pattern="^[^,0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$"
-        minLength="3"
-        maxLength="53"
+        minLength={2}
+        maxLength={53}
         placeholder="Digite seu nome e sobrenome" 
         value={studentName}
         onChange={e => setStudentName(e.target.value)}
